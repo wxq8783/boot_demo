@@ -1,6 +1,11 @@
 package com.wu.thread.cpt2.cpt2_2.cpt2_2_1;
 
 public class TaskRun2_2 {
+    /**
+     * 一个线程访问object对象的一个synchronized(this)同步代码块，
+     * 另一个线程可以访问该object对象的其他非synchronized(this)代码块
+     * @param args
+     */
     public static void main(String[] args) {
         Task2_2 task =new Task2_2();
         MyTreadA2_2 myTreadA = new MyTreadA2_2(task);
