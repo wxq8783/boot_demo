@@ -1,6 +1,9 @@
 package com.wu.netty.cpt1;
 
-public class NIOTimeServer {
+/**
+ * Created by 天&赐&清 on 2018/7/11.
+ */
+public class NIOTimeClient {
     public static void main(String[] args) {
         int port = 8090;
         if(args != null && args.length > 0){
@@ -10,8 +13,6 @@ public class NIOTimeServer {
                 e.printStackTrace();
             }
         }
-
-        MultiplexerTimeServer timeServer = new MultiplexerTimeServer(port);
-        new Thread(timeServer," NIO-TimeServer-0001").start();
+        new Thread(new NIOTimeClientHandler("127.0.0.1",port),"timeClient-0001").start();
     }
 }
