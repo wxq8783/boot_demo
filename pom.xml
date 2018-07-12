@@ -71,13 +71,20 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-
+<!--
         <dependency>
             <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId> <!-- Use 'netty-all' for 4.0 or above -->
+            <artifactId>netty-all</artifactId>
             <version>4.1.10.Final</version>
             <scope>compile</scope>
         </dependency>
+    -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>5.0.0.Alpha1</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -2,10 +2,13 @@ package com.wu.netty.cpt2;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+
 
 public class NettyTimeServer {
     public void bind(int port) throws InterruptedException {
@@ -27,6 +30,22 @@ public class NettyTimeServer {
             //优雅退出  释放线程池资源
             bossGroup.shutdownGracefully();
             workGroup.shutdownGracefully();
+        }
+    }
+
+    public class ChildChannelHandler extends ChannelInitializer<SocketChannel>{
+        @Override
+        protected void initChannel(SocketChannel socketChannel) throws Exception {
+            socketChannel.pipeline().addLast(new NettyTimeServerHandler());
+        }
+    }
+
+    public static void main(String[] args) {
+        int port = 8090;
+        try {
+            new NettyTimeServer().bind(port);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
