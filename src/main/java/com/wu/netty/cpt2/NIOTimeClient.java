@@ -1,4 +1,4 @@
-package com.wu.netty.cpt1;
+package com.wu.netty.cpt2;
 
 /**
  * Created by 天&赐&清 on 2018/7/11.

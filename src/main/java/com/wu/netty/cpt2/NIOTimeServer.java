@@ -1,4 +1,4 @@
-package com.wu.netty.cpt1;
+package com.wu.netty.cpt2;
 
 public class NIOTimeServer {
     public static void main(String[] args) {

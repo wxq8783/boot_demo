@@ -1,4 +1,4 @@
-package com.wu.netty.cpt1;
+package com.wu.netty.cpt2;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
