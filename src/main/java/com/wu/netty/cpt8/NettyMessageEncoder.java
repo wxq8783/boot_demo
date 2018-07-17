@@ -5,17 +5,18 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageEncoder;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 /**
- * 消息编码
+ * 消息编码类
  */
 public class NettyMessageEncoder extends MessageToMessageEncoder<NettyMessage> {
 
     MarshallingEncoder marshallingEncoder;
 
-    public NettyMessageEncoder() {
+    public NettyMessageEncoder() throws IOException {
         this.marshallingEncoder = new MarshallingEncoder();
     }
 
