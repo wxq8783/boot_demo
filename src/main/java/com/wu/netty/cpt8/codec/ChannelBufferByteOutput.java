@@ -1,4 +1,4 @@
-package com.wu.netty.cpt8;
+package com.wu.netty.cpt8.codec;
 
 /**
  * Created by 天&赐&清 on 2018/7/17.

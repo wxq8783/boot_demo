@@ -1,5 +1,6 @@
-package com.wu.netty.cpt8;
+package com.wu.netty.cpt8.codec;
 
+import com.wu.netty.cpt8.NettyMessage;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;

@@ -1,4 +1,4 @@
-package com.wu.netty.cpt8;
+package com.wu.netty.cpt8.codec;
 
 import io.netty.buffer.ByteBuf;
 import org.jboss.marshalling.Marshaller;
