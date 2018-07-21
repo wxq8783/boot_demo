@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class Header  {
+
     private int crcCode = 0xabef0101;
 
     private int length ;//消息长度
