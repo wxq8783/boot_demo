@@ -1,5 +1,4 @@
 package com.wu.netty.cpt8.client;
-
 import com.wu.netty.cpt8.NettyConstant;
 import com.wu.netty.cpt8.codec.NettyMessageDecoder;
 import com.wu.netty.cpt8.codec.NettyMessageEncoder;
@@ -18,39 +17,61 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class NettyClient {
-    private ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
-    public void connect(int port , String host) throws InterruptedException {
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+
+public class NettyClient {
+
+    private static final Log LOG = LogFactory.getLog(NettyClient.class);
+
+    private ScheduledExecutorService executor = Executors
+            .newScheduledThreadPool(1);
+
+    EventLoopGroup group = new NioEventLoopGroup();
+
+    public void connect(int port, String host) throws Exception {
+
+        // 配置客户端NIO线程组
+
         try {
-            EventLoopGroup group = new NioEventLoopGroup();
             Bootstrap b = new Bootstrap();
             b.group(group).channel(NioSocketChannel.class)
-                    .option(ChannelOption.TCP_NODELAY,true)
+                    .option(ChannelOption.TCP_NODELAY, true)
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new NettyMessageDecoder(1024,4,4));
-                            ch.pipeline().addLast("MessageEncoder",new NettyMessageEncoder());
-                            ch.pipeline().addLast("readTimeoutHandler",new ReadTimeoutHandler(50));
-                            ch.pipeline().addLast("LoginAuthHandler",new LoginAuthReqHandler());
-                            ch.pipeline().addLast("HeartBeatHandler",new HeartBeatReqHandler());
+                        public void initChannel(SocketChannel ch)
+                                throws Exception {
+                            ch.pipeline().addLast(
+                                    new NettyMessageDecoder(1024 * 1024, 4, 4));
+                            ch.pipeline().addLast("MessageEncoder",
+                                    new NettyMessageEncoder());
+                            ch.pipeline().addLast("readTimeoutHandler",
+                                    new ReadTimeoutHandler(50));
+                            ch.pipeline().addLast("LoginAuthHandler", new LoginAuthReqHandler());
+                            ch.pipeline().addLast("HeartBeatHandler",
+                                    new HeartBeatReqHandler());
                         }
                     });
-            //发起异步链接操作
-            ChannelFuture future = b.connect(new InetSocketAddress(host,port),new InetSocketAddress(NettyConstant.LOCALIP,NettyConstant.LOCAL_PORT)).sync();
+            // 发起异步连接操作
+            ChannelFuture future = b.connect(
+                    new InetSocketAddress(host, port),
+                    new InetSocketAddress(NettyConstant.LOCALIP,
+                            NettyConstant.LOCAL_PORT)).sync();
+            // 当对应的channel关闭的时候，就会返回对应的channel。
+            // Returns the ChannelFuture which will be notified when this channel is closed. This method always returns the same future instance.
             future.channel().closeFuture().sync();
-            System.out.println("client is connect ok");
         } finally {
+            // 所有资源释放完成之后，清空资源，再次发起重连操作
             executor.execute(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        TimeUnit.SECONDS.sleep(5);
+                        TimeUnit.SECONDS.sleep(1);
                         try {
-                            //发起重链接
-                            connect(NettyConstant.PORT,NettyConstant.REMOTEIP);
-                        } catch (InterruptedException e) {
+                            connect(NettyConstant.PORT, NettyConstant.REMOTEIP);// 发起重连操作
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     } catch (InterruptedException e) {
@@ -61,7 +82,9 @@ public class NettyClient {
         }
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        new NettyClient().connect(NettyConstant.PORT,NettyConstant.REMOTEIP);
+
+    public static void main(String[] args) throws Exception {
+        new NettyClient().connect(NettyConstant.PORT, NettyConstant.REMOTEIP);
     }
+
 }
