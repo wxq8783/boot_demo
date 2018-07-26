@@ -34,6 +34,7 @@ public class ChatServer {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
+
             bossGroup.shutdownGracefully();
             workGroup.shutdownGracefully();
         }
