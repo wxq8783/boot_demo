@@ -26,6 +26,7 @@ public class ChatServer {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             ch.pipeline().addLast(new HttpServerCodec());
+
                         }
                     });
             ChannelFuture f = b.bind(this.port).sync();
