@@ -56,6 +56,13 @@ public class IMMessage {
         return addr;
     }
 
+    public IMMessage(String cmd, Long time, String sender, String content) {
+        this.cmd = cmd;
+        this.time = time;
+        this.sender = sender;
+        this.content = content;
+    }
+
     public void setAddr(String addr) {
         this.addr = addr;
     }
