@@ -1,4 +1,4 @@
-package com.wu.netty.cpt2;
+package com.wu.netty.cpt1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
