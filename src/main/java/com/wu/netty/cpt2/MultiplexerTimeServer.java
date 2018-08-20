@@ -105,11 +105,11 @@ public class MultiplexerTimeServer implements Runnable {
 
     public void doWrite(SocketChannel sc , String response) throws IOException {
         if (response != null && response.trim().length() > 0){
-            byte[] bytes = response.getBytes();
-            ByteBuffer writeBuffer = ByteBuffer.allocate(bytes.length);
-            writeBuffer.put(bytes);
-            writeBuffer.flip();
-            sc.write(writeBuffer);
+                byte[] bytes = response.getBytes();
+                ByteBuffer writeBuffer = ByteBuffer.allocate(bytes.length);
+                writeBuffer.put(bytes);
+                writeBuffer.flip();
+                sc.write(writeBuffer);
         }
     }
 }
