@@ -14,6 +14,9 @@ public class DistributeWatch implements Watcher {
 
     @Override
     public void process(WatchedEvent watchedEvent) {
-        downLatch.countDown();
+        if(watchedEvent.getType() == Event.EventType.NodeDeleted){
+            System.out.println(Thread.currentThread().getName()+"-->收到回调"+watchedEvent.getPath());
+            downLatch.countDown();
+        }
     }
 }

@@ -10,7 +10,7 @@ import java.util.concurrent.CountDownLatch;
 public class ZookeeperClient {
     private final static String CONNECTIONsTRING="47.98.195.145:2181";
 
-    private static int sessionTimeout = 5000;
+    public static int sessionTimeout = 5000;
 
     public static ZooKeeper newInstance() throws InterruptedException, IOException {
         final CountDownLatch downLatch = new CountDownLatch(1);

@@ -1,9 +1,9 @@
 package com.wu.distribute;
 
 import com.alibaba.fastjson.JSON;
-import org.apache.zookeeper.CreateMode;
-import org.apache.zookeeper.KeeperException;
-import org.apache.zookeeper.ZooKeeper;
+import org.apache.zookeeper.*;
+import org.apache.zookeeper.data.Stat;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 public class DistributLock {
-    private final static String ROOT_PATH = "/LOCKS";
+    private final  String ROOT_PATH = "/LOCKS";
 
     private ZooKeeper zooKeeper ;
 
@@ -20,43 +20,54 @@ public class DistributLock {
 
     private String lockID;//记录锁节点ID
 
-    private CountDownLatch downLatch;
+    private CountDownLatch downLatch = new CountDownLatch(1);;
 
     private byte[] data = {0,1};
 
     public DistributLock() throws IOException, InterruptedException {
-        zooKeeper = ZookeeperClient.newInstance();
+        this.zooKeeper = ZookeeperClient.newInstance();
+        this.sessionTimeout = ZookeeperClient.sessionTimeout;
+
+        try {
+            Stat statt = zooKeeper.exists(ROOT_PATH,false);
+            if(statt == null){
+                zooKeeper.create(ROOT_PATH,new byte[]{1},ZooDefs.Ids.OPEN_ACL_UNSAFE,CreateMode.PERSISTENT);
+            }
+        } catch (KeeperException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean lock() throws KeeperException, InterruptedException {
-        lockID = zooKeeper.create(ROOT_PATH+"/",data,null, CreateMode.EPHEMERAL_SEQUENTIAL);
+        lockID = zooKeeper.create(ROOT_PATH+"/",data, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
+
         System.out.println(Thread.currentThread().getName()+"-->创建锁【"+lockID+"】");
-        List<String> childrenList =  zooKeeper.getChildren(ROOT_PATH,new DistributeWatch(downLatch));
+
+        List<String> childrenList =  zooKeeper.getChildren(ROOT_PATH,true);
         SortedSet<String> childSet = new TreeSet<>();
         for(String childLockId : childrenList){
-            childSet.add(childLockId);
+            childSet.add(ROOT_PATH+"/"+childLockId);
         }
         String first = childSet.first();
         if(!StringUtils.isEmpty(first)){
             if(lockID.equals(first)){
-                System.out.println(Thread.currentThread().getName()+"-->第一次成功获得锁："+lockID);
+                System.out.println(Thread.currentThread().getName()+"-->成功获得锁："+lockID);
                 return true;
             }
-            TreeSet<String> lastSet = (TreeSet<String>) childSet.headSet(first);
-            System.out.println("lastSet:"+JSON.toJSONString(lastSet));
+            TreeSet<String> lastSet = (TreeSet<String>) childSet.headSet(lockID);
             String prevLockId = lastSet.last();
-            zooKeeper.exists(ROOT_PATH+"/"+prevLockId,new DistributeWatch(downLatch));
-            downLatch.await(sessionTimeout,TimeUnit.MICROSECONDS);
-            System.out.println(Thread.currentThread().getName()+"-->Wacther成功获得锁："+lockID);
+            zooKeeper.exists(prevLockId,new DistributeWatch(downLatch));
+            downLatch.await(5000,TimeUnit.MILLISECONDS);
+            System.out.println(Thread.currentThread().getName()+"-->成功获得锁："+lockID);
         }
         return true;
     }
 
     public boolean unlock(){
         try {
-            System.out.println(Thread.currentThread().getName()+"-->开始是否锁【"+lockID+"】");
+            System.out.println(Thread.currentThread().getName()+"-->开始释放锁【"+lockID+"】");
             zooKeeper.delete(lockID,-1);
-            System.out.println("是否成功");
+            System.out.println(Thread.currentThread().getName()+"-->释放成功");
             return true;
         } catch (InterruptedException e) {
             e.printStackTrace();
