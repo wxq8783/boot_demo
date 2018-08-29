@@ -6,7 +6,13 @@
     <groupId>com.wu</groupId>
     <artifactId>boot_demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <modules>
+        <module>boot-netty</module>
+        <module>boot-thread</module>
+        <module>boot-lock</module>
+        <module>boot-learn</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <name>boot_demo</name>
     <description>Demo project for Spring Boot</description>
