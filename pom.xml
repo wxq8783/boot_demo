@@ -11,6 +11,7 @@
         <module>boot-thread</module>
         <module>boot-lock</module>
         <module>boot-learn</module>
+        <module>boot-web</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -86,18 +87,6 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-        </dependency>
-        <!--
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-            <version>4.1.10.Final</version>
-        </dependency>
-        -->
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-            <version>5.0.0.Alpha1</version>
         </dependency>
 
 
