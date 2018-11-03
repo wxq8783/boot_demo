@@ -1,4 +1,4 @@
-package com.wu.netty.handler;
+package com.wu.im.demo;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

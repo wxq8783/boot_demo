@@ -1,6 +1,5 @@
-package com.wu.netty;
+package com.wu.im.server;
 
-import com.wu.netty.handler.FirstServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
@@ -22,8 +21,8 @@ public class NettyServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-                        System.out.println("-----------------");
-                        nioSocketChannel.pipeline().addLast("first",new FirstServerHandler());
+
+                        nioSocketChannel.pipeline().addLast(new ServerHandler());
                     }
                 });
         doBind(bootstrap ,8989);

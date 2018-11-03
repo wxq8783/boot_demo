@@ -1,6 +1,5 @@
-package com.wu.netty;
+package com.wu.im.client;
 
-import com.wu.netty.handler.FirstClientHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -29,7 +28,7 @@ public class NettyClient {
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         System.out.println("++++++++++");
                         ChannelPipeline pipeline = socketChannel.pipeline();
-                        pipeline.addLast("first",new FirstClientHandler());
+                        pipeline.addLast(new ClientHandler());
                     }
                 });
         doConnect(bootstrap,"127.0.0.1",8989,MXT_RETRY);
