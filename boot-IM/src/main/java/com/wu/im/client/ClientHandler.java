@@ -2,8 +2,10 @@ package com.wu.im.client;
 
 import com.wu.im.protocol.LoginRequestPacket;
 import com.wu.im.protocol.LoginResponsePacket;
+import com.wu.im.protocol.MessageResponsePacket;
 import com.wu.im.protocol.Packet;
 import com.wu.im.codec.PacketCodec;
+import com.wu.im.util.LoginUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -37,10 +39,15 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
             LoginResponsePacket responsePacket = (LoginResponsePacket) packet;
 
             if(responsePacket.isSuccess()){
+                //添加登录成功的标识
+                LoginUtil.markAsLogin(ctx.channel());
                 System.out.println(new Date()+":客户端登录成功");
             }else{
                 System.out.println(new Date()+":客户端登录失败，失败原因："+responsePacket.getReason());
             }
+        }else if(packet instanceof MessageResponsePacket){
+            MessageResponsePacket responsePacket = (MessageResponsePacket) packet;
+            System.out.println(new Date()+":收到服务端消息："+responsePacket.getMessage());
         }
     }
 }

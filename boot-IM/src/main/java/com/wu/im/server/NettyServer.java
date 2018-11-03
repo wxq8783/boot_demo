@@ -2,12 +2,15 @@ package com.wu.im.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
+
+import java.util.Date;
 
 public class NettyServer {
     public static void main(String[] args) {
@@ -18,10 +21,12 @@ public class NettyServer {
 
         bootstrap.group(bossGroup,workGroup)
                 .channel(NioServerSocketChannel.class)
+                .option(ChannelOption.SO_BACKLOG,1024)
+                .option(ChannelOption.SO_KEEPALIVE,true)
+                .option(ChannelOption.TCP_NODELAY,true)
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-
                         nioSocketChannel.pipeline().addLast(new ServerHandler());
                     }
                 });
@@ -34,9 +39,9 @@ public class NettyServer {
             @Override
             public void operationComplete(Future<? super Void> future) throws Exception {
                 if(future.isSuccess()){
-                    System.out.println("-------------------绑定端口成功："+port);
+                    System.out.println(new Date()+"绑定端口成功："+port);
                 }else{
-                    System.out.println("+++++++++++++++++++绑定端口失败，继续重试下个端口号");
+                    System.out.println("绑定端口失败，继续重试下个端口号");
                     doBind(bootstrap,port+1);
                 }
             }

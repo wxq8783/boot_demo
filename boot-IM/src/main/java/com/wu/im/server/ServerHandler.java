@@ -1,12 +1,12 @@
 package com.wu.im.server;
 
-import com.wu.im.protocol.LoginRequestPacket;
-import com.wu.im.protocol.LoginResponsePacket;
-import com.wu.im.protocol.Packet;
+import com.wu.im.protocol.*;
 import com.wu.im.codec.PacketCodec;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+
+import java.util.Date;
 
 public class ServerHandler extends ChannelInboundHandlerAdapter {
     @Override
@@ -33,6 +33,14 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
             ctx.channel().writeAndFlush(responseBuf);
 
+        }else if(packet instanceof MessageRequestPacket){
+            MessageRequestPacket requestPacket = (MessageRequestPacket) packet;
+            System.out.println(new Date()+":收到客户端信息："+requestPacket.getMessage());
+
+            MessageResponsePacket responsePacket = new MessageResponsePacket();
+            responsePacket.setMessage("服务端回复【"+requestPacket.getMessage()+"】");
+            ByteBuf responseBuf = PacketCodec.INSTANCE.encode(ctx.alloc(),responsePacket);
+            ctx.writeAndFlush(responseBuf);
         }
 
     }

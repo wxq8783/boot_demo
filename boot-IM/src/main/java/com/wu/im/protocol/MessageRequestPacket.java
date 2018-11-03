@@ -1,7 +1,9 @@
 package com.wu.im.protocol;
 
-import static com.wu.im.protocol.Command.MESSAGE_REQUEST;
+import lombok.Data;
 
+import static com.wu.im.protocol.Command.MESSAGE_REQUEST;
+@Data
 public class MessageRequestPacket extends Packet {
 
     private String message;
