@@ -10,7 +10,8 @@ import java.util.Map;
 import static com.wu.im.protocol.Command.*;
 
 public class PacketCodec {
-    private static final int MAGIC_NUMBER = 0x12345678;
+
+    public static final int MAGIC_NUMBER = 0x12345678;
 
     public static final PacketCodec INSTANCE = new PacketCodec();
 
@@ -38,10 +39,9 @@ public class PacketCodec {
      * @param packet
      * @return
      */
-    public ByteBuf encode(ByteBufAllocator allocator ,Packet packet){
+    public ByteBuf encode(ByteBuf byteBuf ,Packet packet){
 
-        //创建一个ByteBuf对象
-        ByteBuf byteBuf = allocator.DEFAULT.ioBuffer();
+
         //序列化对象
         byte[] bytes = Serializer.DEFAULT.serialize(packet);
 

@@ -1,10 +1,10 @@
-package com.wu.im.client;
+package com.wu.im.client.handler;
 
+import com.wu.im.codec.PacketCodec;
 import com.wu.im.protocol.LoginRequestPacket;
 import com.wu.im.protocol.LoginResponsePacket;
 import com.wu.im.protocol.MessageResponsePacket;
 import com.wu.im.protocol.Packet;
-import com.wu.im.codec.PacketCodec;
 import com.wu.im.util.LoginUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -23,7 +23,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         packet.setUsername("flash");
         packet.setPassword("pwd");
 
-        ByteBuf buffer = PacketCodec.INSTANCE.encode(ctx.alloc(),packet);
+        ByteBuf buffer = PacketCodec.INSTANCE.encode(ctx.alloc().ioBuffer(),packet);
 
         ctx.channel().writeAndFlush(buffer);
 

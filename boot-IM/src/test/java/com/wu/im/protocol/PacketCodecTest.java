@@ -21,7 +21,7 @@ public class PacketCodecTest {
         loginRequestPacket.setUsername("zhangsan");
         loginRequestPacket.setPassword("password");
 
-        ByteBuf byteBuf = PacketCodec.INSTANCE.encode(ByteBufAllocator.DEFAULT,loginRequestPacket);
+        ByteBuf byteBuf = PacketCodec.INSTANCE.encode(ByteBufAllocator.DEFAULT.ioBuffer(),loginRequestPacket);
         Packet decodedPacket = PacketCodec.INSTANCE.decode(byteBuf);
         System.out.println(decodedPacket.getCommand());
         System.out.println("------------");

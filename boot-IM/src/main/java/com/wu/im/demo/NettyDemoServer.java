@@ -1,13 +1,9 @@
-package com.wu.im.server;
+package com.wu.im.demo;
 
 import com.wu.im.codec.PacketDecoder;
 import com.wu.im.codec.PacketEncoder;
-import com.wu.im.codec.Spliter;
-import com.wu.im.demo.LifeCycleTestHandler;
-import com.wu.im.server.handler.AuthHandler;
 import com.wu.im.server.handler.LoginRequestHandler;
 import com.wu.im.server.handler.MessageRequestHandler;
-import com.wu.im.server.handler.ServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
@@ -15,7 +11,6 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 
@@ -28,7 +23,7 @@ import java.util.Date;
  * ChannelPipeline 是一个双向链表结构，他和 Channel 之间是一对一的关系。...
  *
  */
-public class NettyServer {
+public class NettyDemoServer {
 
 
     public static void main(String[] args) {
@@ -45,14 +40,7 @@ public class NettyServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-                        //nioSocketChannel.pipeline().addLast(new ServerHandler());
-                        //nioSocketChannel.pipeline().addLast(new LifeCycleTestHandler());
-                        nioSocketChannel.pipeline().addLast(new Spliter());
-                        nioSocketChannel.pipeline().addLast(new PacketDecoder());
-                        nioSocketChannel.pipeline().addLast(new LoginRequestHandler());
-                        nioSocketChannel.pipeline().addLast(new AuthHandler());
-                        nioSocketChannel.pipeline().addLast(new MessageRequestHandler());
-                        nioSocketChannel.pipeline().addLast(new PacketEncoder());
+                      nioSocketChannel.pipeline().addLast(new FirstServerHandler());
                     }
                 });
         doBind(bootstrap ,8989);

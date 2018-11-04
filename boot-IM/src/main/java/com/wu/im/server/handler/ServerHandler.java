@@ -1,4 +1,4 @@
-package com.wu.im.server;
+package com.wu.im.server.handler;
 
 import com.wu.im.protocol.*;
 import com.wu.im.codec.PacketCodec;
@@ -29,7 +29,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                 responsePacket.setReason("账号密码错误");
             }
 
-            ByteBuf responseBuf = PacketCodec.INSTANCE.encode(ctx.alloc(),responsePacket);
+            ByteBuf responseBuf = PacketCodec.INSTANCE.encode(ctx.alloc().ioBuffer(),responsePacket);
 
             ctx.channel().writeAndFlush(responseBuf);
 
@@ -39,7 +39,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
             MessageResponsePacket responsePacket = new MessageResponsePacket();
             responsePacket.setMessage("服务端回复【"+requestPacket.getMessage()+"】");
-            ByteBuf responseBuf = PacketCodec.INSTANCE.encode(ctx.alloc(),responsePacket);
+            ByteBuf responseBuf = PacketCodec.INSTANCE.encode(ctx.alloc().ioBuffer(),responsePacket);
             ctx.writeAndFlush(responseBuf);
         }
 
