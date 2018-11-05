@@ -7,6 +7,9 @@ import com.wu.im.codec.PacketCodec;
 import com.wu.im.codec.PacketDecoder;
 import com.wu.im.codec.PacketEncoder;
 import com.wu.im.codec.Spliter;
+import com.wu.im.console.ConsoleCommand;
+import com.wu.im.console.ConsoleCommandManager;
+import com.wu.im.console.LoginConcoleCommand;
 import com.wu.im.protocol.LoginRequestPacket;
 import com.wu.im.protocol.MessageRequestPacket;
 import com.wu.im.session.SessionUtil;
@@ -77,26 +80,24 @@ public class NettyClient {
     }
 
     private static void startConsoleThread(Channel channel) {
+
+        ConsoleCommandManager manager = new ConsoleCommandManager();
+
+        LoginConcoleCommand loginConcoleCommand = new LoginConcoleCommand();
+
         Scanner sc = new Scanner(System.in);
-        LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
+
 
         new Thread(() -> {
             while (!Thread.interrupted()) {
                 if (!SessionUtil.hasLogin(channel)) {
-                    System.out.print("输入用户名登录: ");
-                    String username = sc.nextLine();
-                    loginRequestPacket.setUsername(username);
-
-                    // 密码使用默认的
-                    loginRequestPacket.setPassword("pwd");
-
-                    // 发送登录数据包
-                    channel.writeAndFlush(loginRequestPacket);
-                    waitForLoginResponse();
+                   loginConcoleCommand.exec(sc,channel);
+                   waitForLoginResponse();
                 } else {
-                    String toUserId = sc.next();
-                    String message = sc.next();
-                    channel.writeAndFlush(new MessageRequestPacket(toUserId, message));
+//                    String toUserId = sc.next();
+//                    String message = sc.next();
+//                    channel.writeAndFlush(new MessageRequestPacket(toUserId, message));
+                    manager.exec(sc,channel);
                 }
             }
         }).start();
