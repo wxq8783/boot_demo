@@ -15,6 +15,7 @@
         <module>boot-learn</module>
         <module>boot-web</module>
         <module>boot-IM</module>
+        <module>boot-algorithm</module>
     </modules>
 
 
