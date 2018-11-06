@@ -1,6 +1,6 @@
 package com.wu.im.console;
 
-import com.wu.im.protocol.LoginRequestPacket;
+import com.wu.im.protocol.request.LoginRequestPacket;
 import io.netty.channel.Channel;
 
 import java.util.Scanner;

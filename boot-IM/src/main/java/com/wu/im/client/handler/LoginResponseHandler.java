@@ -1,28 +1,14 @@
 package com.wu.im.client.handler;
 
-import com.wu.im.protocol.LoginRequestPacket;
-import com.wu.im.protocol.LoginResponsePacket;
+import com.wu.im.protocol.response.LoginResponsePacket;
 import com.wu.im.session.Session;
 import com.wu.im.session.SessionUtil;
-import com.wu.im.util.LoginUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
-import java.util.Date;
-import java.util.UUID;
-
 public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginResponsePacket> {
 
-//    @Override
-//    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-//        //创建登录对象
-//        LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
-//        loginRequestPacket.setUserId(UUID.randomUUID().toString());
-//        loginRequestPacket.setUsername("flash");
-//        loginRequestPacket.setPassword("pwd");
-//
-//        ctx.channel().writeAndFlush(loginRequestPacket);
-//    }
+
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginResponsePacket msg) throws Exception {

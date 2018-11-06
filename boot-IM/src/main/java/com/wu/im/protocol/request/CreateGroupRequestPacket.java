@@ -1,5 +1,6 @@
-package com.wu.im.protocol;
+package com.wu.im.protocol.request;
 
+import com.wu.im.protocol.Packet;
 import lombok.Data;
 
 import java.util.List;

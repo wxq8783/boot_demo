@@ -3,6 +3,7 @@ package com.wu.im.protocol;
 import com.wu.im.codec.JSONSerializer;
 import com.wu.im.codec.PacketCodec;
 import com.wu.im.codec.Serializer;
+import com.wu.im.protocol.request.LoginRequestPacket;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import org.junit.Assert;

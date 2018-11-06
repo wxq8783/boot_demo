@@ -1,6 +1,6 @@
 package com.wu.im.console;
 
-import com.wu.im.protocol.CreateGroupRequestPacket;
+import com.wu.im.protocol.request.CreateGroupRequestPacket;
 import io.netty.channel.Channel;
 
 import java.util.Arrays;

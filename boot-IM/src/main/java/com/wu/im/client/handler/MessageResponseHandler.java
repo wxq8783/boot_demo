@@ -1,6 +1,6 @@
 package com.wu.im.client.handler;
 
-import com.wu.im.protocol.MessageResponsePacket;
+import com.wu.im.protocol.response.MessageResponsePacket;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 

@@ -1,9 +1,9 @@
 package com.wu.im.client.handler;
 
 import com.wu.im.codec.PacketCodec;
-import com.wu.im.protocol.LoginRequestPacket;
-import com.wu.im.protocol.LoginResponsePacket;
-import com.wu.im.protocol.MessageResponsePacket;
+import com.wu.im.protocol.request.LoginRequestPacket;
+import com.wu.im.protocol.response.LoginResponsePacket;
+import com.wu.im.protocol.response.MessageResponsePacket;
 import com.wu.im.protocol.Packet;
 import com.wu.im.util.LoginUtil;
 import io.netty.buffer.ByteBuf;

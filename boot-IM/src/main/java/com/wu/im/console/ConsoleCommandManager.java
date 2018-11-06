@@ -14,7 +14,11 @@ public class ConsoleCommandManager implements ConsoleCommand {
         consoleCommandMap = new HashMap<>();
         consoleCommandMap.put("sendToUser",new SendToUserConsoleCommand());
         consoleCommandMap.put("logout",new LogoutConsoleCommand());
+        consoleCommandMap.put("login",new LoginConcoleCommand());
         consoleCommandMap.put("createGroup",new CreateGroupConsoleCommand());
+        consoleCommandMap.put("joinGroup",new JoinGroupConsoleCommand());
+        consoleCommandMap.put("sendToGroup",new SendToGroupConsoleCommand());
+        consoleCommandMap.put("quitGroup",new QuitGroupConsoleCommand());
     }
 
     @Override

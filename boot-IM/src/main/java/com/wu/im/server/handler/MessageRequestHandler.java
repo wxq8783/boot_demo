@@ -1,7 +1,7 @@
 package com.wu.im.server.handler;
 
-import com.wu.im.protocol.MessageRequestPacket;
-import com.wu.im.protocol.MessageResponsePacket;
+import com.wu.im.protocol.request.MessageRequestPacket;
+import com.wu.im.protocol.response.MessageResponsePacket;
 import com.wu.im.session.Session;
 import com.wu.im.session.SessionUtil;
 import io.netty.channel.Channel;

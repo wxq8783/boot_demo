@@ -1,26 +1,18 @@
 package com.wu.im.client;
 
-import com.wu.im.client.handler.ClientHandler;
 import com.wu.im.client.handler.LoginResponseHandler;
 import com.wu.im.client.handler.MessageResponseHandler;
-import com.wu.im.codec.PacketCodec;
 import com.wu.im.codec.PacketDecoder;
 import com.wu.im.codec.PacketEncoder;
 import com.wu.im.codec.Spliter;
-import com.wu.im.console.ConsoleCommand;
 import com.wu.im.console.ConsoleCommandManager;
 import com.wu.im.console.LoginConcoleCommand;
-import com.wu.im.protocol.LoginRequestPacket;
-import com.wu.im.protocol.MessageRequestPacket;
 import com.wu.im.session.SessionUtil;
-import com.wu.im.util.LoginUtil;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 

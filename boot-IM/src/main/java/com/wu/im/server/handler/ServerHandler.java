@@ -2,6 +2,10 @@ package com.wu.im.server.handler;
 
 import com.wu.im.protocol.*;
 import com.wu.im.codec.PacketCodec;
+import com.wu.im.protocol.request.LoginRequestPacket;
+import com.wu.im.protocol.request.MessageRequestPacket;
+import com.wu.im.protocol.response.LoginResponsePacket;
+import com.wu.im.protocol.response.MessageResponsePacket;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

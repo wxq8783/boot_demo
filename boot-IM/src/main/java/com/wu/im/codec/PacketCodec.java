@@ -1,8 +1,11 @@
 package com.wu.im.codec;
 
 import com.wu.im.protocol.*;
+import com.wu.im.protocol.request.LoginRequestPacket;
+import com.wu.im.protocol.request.MessageRequestPacket;
+import com.wu.im.protocol.response.LoginResponsePacket;
+import com.wu.im.protocol.response.MessageResponsePacket;
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
 
 import java.util.HashMap;
 import java.util.Map;

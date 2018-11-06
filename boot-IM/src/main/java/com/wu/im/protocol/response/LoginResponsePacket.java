@@ -1,5 +1,6 @@
-package com.wu.im.protocol;
+package com.wu.im.protocol.response;
 
+import com.wu.im.protocol.Packet;
 import lombok.Data;
 
 import static com.wu.im.protocol.Command.LOGIN_RESPONSE;

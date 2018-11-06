@@ -1,7 +1,7 @@
 package com.wu.im.server.handler;
 
-import com.wu.im.protocol.CreateGroupRequestPacket;
-import com.wu.im.protocol.CreateGroupResponsePacket;
+import com.wu.im.protocol.request.CreateGroupRequestPacket;
+import com.wu.im.protocol.response.CreateGroupResponsePacket;
 import com.wu.im.session.SessionUtil;
 import com.wu.im.util.IDUtil;
 import io.netty.channel.Channel;

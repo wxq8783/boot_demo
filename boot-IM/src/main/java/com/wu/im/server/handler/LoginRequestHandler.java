@@ -1,10 +1,9 @@
 package com.wu.im.server.handler;
 
-import com.wu.im.protocol.LoginRequestPacket;
-import com.wu.im.protocol.LoginResponsePacket;
+import com.wu.im.protocol.request.LoginRequestPacket;
+import com.wu.im.protocol.response.LoginResponsePacket;
 import com.wu.im.session.Session;
 import com.wu.im.session.SessionUtil;
-import com.wu.im.util.LoginUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
