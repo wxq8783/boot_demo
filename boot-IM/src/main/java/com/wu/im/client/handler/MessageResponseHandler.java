@@ -10,6 +10,6 @@ public class MessageResponseHandler extends SimpleChannelInboundHandler<MessageR
     protected void channelRead0(ChannelHandlerContext ctx, MessageResponsePacket msg) throws Exception {
         String fromUserId = msg.getFromUserId();
         String fromUserName = msg.getFromUserName();
-        System.out.println(fromUserId+":"+fromUserName+"-->"+msg.getMessage());
+        System.out.println("收到用户："+fromUserName+"【"+fromUserId+"】-->"+msg.getMessage());
     }
 }

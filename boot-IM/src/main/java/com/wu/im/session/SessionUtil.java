@@ -3,7 +3,6 @@ package com.wu.im.session;
 import com.wu.im.util.Attributes;
 import io.netty.channel.Channel;
 import io.netty.channel.group.ChannelGroup;
-import io.netty.util.AttributeKey;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -40,6 +39,16 @@ public class SessionUtil {
     public static Channel getChannel(String userId){
         return userIdChannelMap.get(userId);
     }
+
+    public static void bindGroup(String groupId , ChannelGroup channelGroup){
+        groupIdChannelMap.put(groupId,channelGroup);
+    }
+
+
+    public static ChannelGroup getChannelGroup(String groupId){
+        return groupIdChannelMap.get(groupId);
+    }
+
 
 
 

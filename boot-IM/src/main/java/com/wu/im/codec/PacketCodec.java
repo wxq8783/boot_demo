@@ -1,10 +1,8 @@
 package com.wu.im.codec;
 
 import com.wu.im.protocol.*;
-import com.wu.im.protocol.request.LoginRequestPacket;
-import com.wu.im.protocol.request.MessageRequestPacket;
-import com.wu.im.protocol.response.LoginResponsePacket;
-import com.wu.im.protocol.response.MessageResponsePacket;
+import com.wu.im.protocol.request.*;
+import com.wu.im.protocol.response.*;
 import io.netty.buffer.ByteBuf;
 
 import java.util.HashMap;
@@ -27,10 +25,24 @@ public class PacketCodec {
 
     static {
         requestTypeMap = new HashMap<>();
-        requestTypeMap.put(LOGIN_REQUEST,LoginRequestPacket.class);
-        requestTypeMap.put(LOGIN_RESPONSE,LoginResponsePacket.class);
-        requestTypeMap.put(MESSAGE_REQUEST,MessageRequestPacket.class);
-        requestTypeMap.put(MESSAGE_RESPONSE,MessageResponsePacket.class);
+        requestTypeMap.put(LOGIN_REQUEST, LoginRequestPacket.class);
+        requestTypeMap.put(LOGIN_RESPONSE, LoginResponsePacket.class);
+        requestTypeMap.put(MESSAGE_REQUEST, MessageRequestPacket.class);
+        requestTypeMap.put(MESSAGE_RESPONSE, MessageResponsePacket.class);
+        requestTypeMap.put(LOGOUT_REQUEST, LogoutRequestPacket.class);
+        requestTypeMap.put(LOGOUT_RESPONSE, LogoutResponsePacket.class);
+        requestTypeMap.put(CREATE_GROUP_REQUEST, CreateGroupRequestPacket.class);
+        requestTypeMap.put(CREATE_GROUP_RESPONSE, CreateGroupResponsePacket.class);
+        requestTypeMap.put(JOIN_GROUP_REQUEST, JoinGroupRequestPacket.class);
+        requestTypeMap.put(JOIN_GROUP_RESPONSE, JoinGroupResponsePacket.class);
+        requestTypeMap.put(QUIT_GROUP_REQUEST, QuitGroupRequestPacket.class);
+        requestTypeMap.put(QUIT_GROUP_RESPONSE, QuitGroupResponsePacket.class);
+//        requestTypeMap.put(LIST_GROUP_MEMBERS_REQUEST, ListGroupMembersRequestPacket.class);
+//        requestTypeMap.put(LIST_GROUP_MEMBERS_RESPONSE, ListGroupMembersResponsePacket.class);
+        requestTypeMap.put(GROUP_MESSAGE_REQUEST, GroupMessageRequestPacket.class);
+        requestTypeMap.put(GROUP_MESSAGE_RESPONSE, GroupMessageResponsePacket.class);
+//        requestTypeMap.put(HEARTBEAT_REQUEST, HeartBeatRequestPacket.class);
+//        requestTypeMap.put(HEARTBEAT_RESPONSE, HeartBeatResponsePacket.class);
 
 
         serializerMap = new HashMap<>();

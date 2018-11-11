@@ -13,7 +13,7 @@ import java.util.Date;
 public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRequestPacket> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageRequestPacket msg) throws Exception {
-        System.out.println(new Date()+":收到客户端消息："+msg.getMessage());
+        System.out.println("收到客户端消息："+msg.getMessage());
 
         String toUserId = msg.getToUserId();
 

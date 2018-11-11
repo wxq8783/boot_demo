@@ -1,12 +1,12 @@
 package com.wu.im.client;
 
-import com.wu.im.client.handler.LoginResponseHandler;
-import com.wu.im.client.handler.MessageResponseHandler;
+import com.wu.im.client.handler.*;
 import com.wu.im.codec.PacketDecoder;
 import com.wu.im.codec.PacketEncoder;
 import com.wu.im.codec.Spliter;
 import com.wu.im.console.ConsoleCommandManager;
 import com.wu.im.console.LoginConcoleCommand;
+import com.wu.im.server.handler.GroupMessageRequestHandler;
 import com.wu.im.session.SessionUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -44,7 +44,12 @@ public class NettyClient {
                         pipeline.addLast(new Spliter());
                         pipeline.addLast(new PacketDecoder());
                         pipeline.addLast(new LoginResponseHandler());
+                        pipeline.addLast(new LogoutResponseHandler());
                         pipeline.addLast(new MessageResponseHandler());
+                        pipeline.addLast(new CreateGroupResponseHandler());
+                        pipeline.addLast(new GroupMessageResponseHandler());
+                        pipeline.addLast(new JoinGroupResponseHandler());
+                        pipeline.addLast(new QuitGroupResponseHandler());
                         pipeline.addLast(new PacketEncoder());
                     }
                 });

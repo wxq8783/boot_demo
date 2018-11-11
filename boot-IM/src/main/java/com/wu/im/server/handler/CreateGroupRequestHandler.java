@@ -36,6 +36,8 @@ public class CreateGroupRequestHandler extends SimpleChannelInboundHandler<Creat
         packet.setUserNameList(userNameList);
         group.writeAndFlush(packet);
 
+        SessionUtil.bindGroup(packet.getGroupId(),group);
+
         System.out.print("群创建成功，id 为[" + packet.getGroupId() + "], ");
         System.out.println("群里面有：" + packet.getUserNameList());
 
