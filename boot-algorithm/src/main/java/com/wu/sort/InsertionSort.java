@@ -25,7 +25,9 @@ public class InsertionSort {
             current = array[i+1];
             int preIndex = i;
             while(preIndex >= 0 && current < array[preIndex]   ){
+                //把下标+1
                 array[preIndex+1] = array[preIndex];
+                //往前移一位
                 preIndex--;
             }
             array[preIndex+1] = current;
@@ -33,9 +35,24 @@ public class InsertionSort {
         return array;
     }
 
+    public static int[] insertionSort2(int[] array){
+        if(array.length == 0)
+            return null;
+        for(int i = 1;i<array.length;i++){
+            int j = i;
+            while (j>0 && array[j] < array[j-1]){
+                int temp = array[j-1];
+                array[j-1] = array[j];
+                array[j] = temp;
+                j--;
+            }
+        }
+        return array;
+    }
+
     public static void main(String[] args) {
         int[] array = new int[]{3,1,5,4,10,4,13,8,7,6};
-        array = insertionSort(array);
+        array = insertionSort2(array);
         for(int i : array){
             System.out.println(i);
         }
