@@ -2,6 +2,9 @@ package com.wu.sort;
 
 import com.alibaba.fastjson.JSON;
 
+/**
+ * 希尔排序
+ */
 public class ShellSort {
 
     public static int[] ShellSort(int[] array) {
