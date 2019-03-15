@@ -14,9 +14,9 @@ public class LongEventTest {
 
         LongEventFactory factory = new LongEventFactory();
 
-        int buffSzie = 1024;
+        int buffSie = 1024;
 
-        Disruptor<LongEvent> disruptor = new Disruptor<LongEvent>(factory,buffSzie,executor);
+        Disruptor<LongEvent> disruptor = new Disruptor<LongEvent>(factory,buffSie,executor);
 
         disruptor.handleEventsWith(new LongEventHandle());
 

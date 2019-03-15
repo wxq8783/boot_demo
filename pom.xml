@@ -17,6 +17,7 @@
         <module>boot-IM</module>
         <module>boot-algorithm</module>
         <module>boot-rocketmq</module>
+        <module>boot-scalable</module>
     </modules>
 
 
@@ -46,9 +47,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.lmax</groupId>
+            <groupId>com.lmax.source</groupId>
             <artifactId>disruptor</artifactId>
-            <version>3.4.2</version>
+            <version>1.0</version>
         </dependency>
 
         <dependency>
