@@ -5,10 +5,11 @@ import java.net.InetSocketAddress;
 import java.nio.channels.ServerSocketChannel;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class NioServer {
     private static final int DEFAULT_PORT = 9999;
-
+    private static AtomicInteger times = new AtomicInteger(1);
     public static void main(String[] args) {
         new Thread(new Acceptor()).start();
     }
@@ -36,6 +37,7 @@ public class NioServer {
         }
 
         private void dispatch(ServerSocketChannel ssc){
+            System.out.println("------------------"+times.getAndIncrement());
             mainReactor.submit(new MainReactor(ssc));
         }
     }

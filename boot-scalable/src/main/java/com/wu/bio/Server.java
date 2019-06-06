@@ -41,7 +41,7 @@ public class Server implements Runnable {
         }
 
         private byte[] process(byte[] input){
-            return null;
+            return "---->返回测试数据".getBytes();
         }
     }
 }
