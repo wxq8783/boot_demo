@@ -1,0 +1,144 @@
+Classfile /D:/think-in-spring-boot-samples/first-app-by-gui/target/test-classes/thinking/in/spring/boot/java/segment/third/second/SynchronizedDemo.class
+  Last modified 2019-6-5; size 998 bytes
+  MD5 checksum 5d554d34c0ab1275f3df9a7bffacece0
+  Compiled from "SynchronizedDemo.java"
+public class thinking.in.spring.boot.java.segment.third.second.SynchronizedDemo
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #2.#31         // java/lang/Object."<init>":()V
+   #2 = Class              #32            // java/lang/Object
+   #3 = Methodref          #6.#33         // thinking/in/spring/boot/java/segment/third/second/SynchronizedDemo.echo:(Ljava/lang/String;)V
+   #4 = Fieldref           #34.#35        // java/lang/System.out:Ljava/io/PrintStream;
+   #5 = Methodref          #36.#37        // java/io/PrintStream.println:(Ljava/lang/String;)V
+   #6 = Class              #38            // thinking/in/spring/boot/java/segment/third/second/SynchronizedDemo
+   #7 = Utf8               <init>
+   #8 = Utf8               ()V
+   #9 = Utf8               Code
+  #10 = Utf8               LineNumberTable
+  #11 = Utf8               LocalVariableTable
+  #12 = Utf8               this
+  #13 = Utf8               Lthinking/in/spring/boot/java/segment/third/second/SynchronizedDemo;
+  #14 = Utf8               main
+  #15 = Utf8               ([Ljava/lang/String;)V
+  #16 = Utf8               args
+  #17 = Utf8               [Ljava/lang/String;
+  #18 = Utf8               doEcho
+  #19 = Utf8               (Ljava/lang/String;)V
+  #20 = Utf8               message
+  #21 = Utf8               Ljava/lang/String;
+  #22 = Utf8               object
+  #23 = Utf8               Ljava/lang/Object;
+  #24 = Utf8               StackMapTable
+  #25 = Class              #39            // java/lang/String
+  #26 = Class              #32            // java/lang/Object
+  #27 = Class              #40            // java/lang/Throwable
+  #28 = Utf8               echo
+  #29 = Utf8               SourceFile
+  #30 = Utf8               SynchronizedDemo.java
+  #31 = NameAndType        #7:#8          // "<init>":()V
+  #32 = Utf8               java/lang/Object
+  #33 = NameAndType        #28:#19        // echo:(Ljava/lang/String;)V
+  #34 = Class              #41            // java/lang/System
+  #35 = NameAndType        #42:#43        // out:Ljava/io/PrintStream;
+  #36 = Class              #44            // java/io/PrintStream
+  #37 = NameAndType        #45:#19        // println:(Ljava/lang/String;)V
+  #38 = Utf8               thinking/in/spring/boot/java/segment/third/second/SynchronizedDemo
+  #39 = Utf8               java/lang/String
+  #40 = Utf8               java/lang/Throwable
+  #41 = Utf8               java/lang/System
+  #42 = Utf8               out
+  #43 = Utf8               Ljava/io/PrintStream;
+  #44 = Utf8               java/io/PrintStream
+  #45 = Utf8               println
+{
+  public thinking.in.spring.boot.java.segment.third.second.SynchronizedDemo();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 3: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lthinking/in/spring/boot/java/segment/third/second/SynchronizedDemo;
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=0, locals=1, args_size=1
+         0: return
+      LineNumberTable:
+        line 7: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       1     0  args   [Ljava/lang/String;
+
+  private static void doEcho(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: ACC_PRIVATE, ACC_STATIC
+    Code:
+      stack=2, locals=4, args_size=1
+         0: new           #2                  // class java/lang/Object
+         3: dup
+         4: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         7: astore_1
+         8: aload_1
+         9: dup
+        10: astore_2
+        11: monitorenter
+        12: aload_0
+        13: invokestatic  #3                  // Method echo:(Ljava/lang/String;)V
+        16: aload_2
+        17: monitorexit
+        18: goto          26
+        21: astore_3
+        22: aload_2
+        23: monitorexit
+        24: aload_3
+        25: athrow
+        26: return
+      Exception table:
+         from    to  target type
+            12    18    21   any
+            21    24    21   any
+      LineNumberTable:
+        line 10: 0
+        line 11: 8
+        line 12: 12
+        line 13: 16
+        line 14: 26
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      27     0 message   Ljava/lang/String;
+            8      19     1 object   Ljava/lang/Object;
+      StackMapTable: number_of_entries = 2
+        frame_type = 255 /* full_frame */
+          offset_delta = 21
+          locals = [ class java/lang/String, class java/lang/Object, class java/lang/Object ]
+          stack = [ class java/lang/Throwable ]
+        frame_type = 250 /* chop */
+          offset_delta = 4
+
+  private static synchronized void echo(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: ACC_PRIVATE, ACC_STATIC, ACC_SYNCHRONIZED
+    Code:
+      stack=2, locals=1, args_size=1
+         0: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;
+         3: aload_0
+         4: invokevirtual #5                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+         7: return
+      LineNumberTable:
+        line 17: 0
+        line 18: 7
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       8     0 message   Ljava/lang/String;
+}
+SourceFile: "SynchronizedDemo.java"
