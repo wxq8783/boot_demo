@@ -5,6 +5,20 @@ import java.util.Scanner;
 public class CircleArrayQueueDemo {
 
     public static void main(String[] args) {
+        CircleArrayQueue queue = new CircleArrayQueue(5);
+        queue.add(10);
+        queue.add(20);
+        queue.add(30);
+        queue.add(40);
+        queue.add(50);
+        queue.get();
+        queue.get();
+        queue.add(60);
+        queue.add(70);
+        queue.add(80);
+    }
+
+    public static void main1(String[] args) {
 
         //测试一把
         System.out.println("测试数组模拟环形队列的案例~~~");
@@ -61,6 +75,111 @@ public class CircleArrayQueueDemo {
     }
 
 }
+
+
+
+class CircleArrayQueue{
+    private int maxSize;
+
+    private int front ;//首节点
+
+    private int rear ;//尾节点
+
+    private int[] arr;
+
+    public CircleArrayQueue(int maxSize){
+        this.maxSize = maxSize;
+        this.front = 0;
+        this.rear = 0;
+        arr = new int[maxSize];
+    }
+
+    public boolean isFull(){
+        if(front  != 0 && rear != 0 && rear == front){
+            return true;
+        }
+        if(front == 0 && rear == maxSize){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isEmpty(){
+        return rear == 0;
+    }
+
+    public void  add(int node){
+        if(isFull()){
+            System.out.println("----->队列已经满了");
+            return;
+        }
+        if(rear == maxSize){
+            arr[0] = node;
+            rear = 0;
+        }else{
+            arr[rear] = node;
+        }
+        rear++;
+        System.out.println("--------->add:"+node);
+    }
+
+    public int get(){
+        if(isEmpty()){
+            System.out.println("------>队列为空");
+            return 0;
+        }
+        System.out.println("--------->get下标:"+front);
+        int value =  arr[front];
+        if(front+1 == maxSize){
+            front = 0;
+        }else{
+            front++;
+        }
+        return value;
+    }
+
+    public int length(){
+        if(rear >= front){
+            return rear - front;
+        }else{
+            return maxSize-front+rear;
+        }
+    }
+
+    public void showQueue(){
+        if(isEmpty()){
+            System.out.println("-------->队列为空");
+            return;
+        }
+
+        if(rear >= front){
+
+        }
+
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i< arr.length;i++){
+            sb.append("第").append(i).append("的:").append(arr[i]).append("    ");
+        }
+        return sb.toString();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class CircleArray {
