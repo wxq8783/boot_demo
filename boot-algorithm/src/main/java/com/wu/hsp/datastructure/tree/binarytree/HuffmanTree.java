@@ -1,6 +1,4 @@
-package com.wu.hsp.datastructure.tree;
-
-import org.springframework.util.CollectionUtils;
+package com.wu.hsp.datastructure.tree.binarytree;
 
 import java.util.ArrayList;
 import java.util.Collections;

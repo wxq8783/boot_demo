@@ -1,4 +1,4 @@
-package com.wu.hsp.datastructure.tree;
+package com.wu.hsp.datastructure.tree.binarytree;
 
 /**
  * 顺序存储二叉树
