@@ -1,13 +1,19 @@
 package com.calvin.reactor;
 
 import org.junit.jupiter.api.Test;
+import org.reactivestreams.Subscription;
+import reactor.core.publisher.BaseSubscriber;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Scheduler;
+import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
 
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 public class FluxAndMonoDemo {
@@ -116,4 +122,49 @@ public class FluxAndMonoDemo {
                 .verify();
     }
 
+    private String getStringSync(){
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "Hello Reactor";
+    }
+
+    @Test
+    public void testSyncToAsync() throws InterruptedException {
+        System.out.println("11111   "+System.currentTimeMillis());
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        Mono.fromCallable(()->getStringSync())
+                .subscribeOn(Schedulers.elastic())
+                .subscribe(System.out::println,null,countDownLatch::countDown);
+        countDownLatch.await(10,TimeUnit.SECONDS);
+        System.out.println("222   "+System.currentTimeMillis());
+    }
+
+    @Test
+    public void testBuckPressure(){
+        Flux.range(1,10)
+                .doOnRequest(n-> System.out.println("Request "+n+" values..."))
+                .subscribe(new BaseSubscriber<Integer>() {
+                    //hookOnSubscribe定义在订阅的时候执行的操作
+                    @Override
+                    protected void hookOnSubscribe(Subscription subscription) {
+                        System.out.println("Subscribed and make a request...");
+                        request(2);
+                    }
+
+                    //hookOnNext定义每次在收到一个元素的时候的操作；
+                    @Override
+                    protected void hookOnNext(Integer value) {
+                        try {
+                            TimeUnit.SECONDS.sleep(1);  // 7
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println("Get value [" + value + "]");    // 8
+                        request(2); // 9
+                    }
+                });
+    }
 }

@@ -6,6 +6,8 @@ import com.alibaba.fastjson.JSON;
  * 快速排序
  */
 public class QuickSort {
+
+
     public static int[] quickSort(int[] array , int start , int end){
         if(array.length < 2 || start < 0 || start >= array.length || end > array.length || start > end ){
             return null;
